@@ -1,3 +1,4 @@
+// Dynamic Typing Effect
 const textAnimation = document.querySelector('.text-animation span');
 const phrases = ["Web Developer ", "Software Developer ", "Web Designer ", "UI / UX Designer "];
 
@@ -29,7 +30,7 @@ function typeText() {
 
 typeText();
 
-// Smooth scrolling logic
+// Smooth Scrolling for Navigation Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -61,3 +62,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Highlight Active Navigation Link on Scroll
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('header nav a');
+
+window.onscroll = () => {
+    const top = window.scrollY;
+    sections.forEach(sec => {
+        const offset = sec.offsetTop - 150; // Adjust for header height or margin
+        const height = sec.offsetHeight;
+        const id = sec.getAttribute('id');
+
+        if (top >= offset && top < offset + height) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                document.querySelector(`header nav a[href="#${id}"]`).classList.add('active');
+            });
+        }
+    });
+};
